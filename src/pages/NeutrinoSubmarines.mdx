@@ -6,6 +6,7 @@ import OscillationIbdImg from '../assets/neutrino_submarines/oscillation_ibd.png
 import BolometerImg from '../assets/neutrino_submarines/bolometer.png';
 import GalanisCoilImg from '../assets/neutrino_submarines/galanis_coil.png';
 import NeutrinoRangePlot from '../components/NeutrinoRangePlot';
+import CoherenceConeDemo from '../components/CoherenceConeDemo';
 import NeutrinoSubmarineHero from '../components/NeutrinoSubmarineHero';
 
 <NeutrinoSubmarineHero />
@@ -173,7 +174,7 @@ For the tanker, 3.4 events per hour is borderline viable, but any further increa
 
 <NeutrinoRangePlot
   detectors={["ibd-747", "ibd-vlcc"]}
-  caption="The intractive plot above illustrates the data. The range slider (left) allows you to view the events per hour at any scale. The patrol slider (right) allows you to control the speed of the submarine. Higher speeds produce more neutrinos. Vertical lines flag estimated max detection ranges for competing technologies."
+  caption="The interactive plot above illustrates the data. The range slider (left) allows you to view the events per hour at any scale. The patrol slider (right) allows you to control the speed of the submarine. Higher speeds produce more neutrinos. Vertical lines flag estimated max detection ranges for competing technologies."
 />
 
 ## Coherent Elastic Neutrino-Nucleus Scattering (CEvNS)
@@ -233,17 +234,6 @@ Because CEvNS still has some signal at 50 km, it actually starts to become a pra
   caption="CEvNS compared against IBD Baseline"
 />
 
-{/* TODO: prose for the CEvNS panel. Points the widget makes:
-    - the oscillation toggle is the cleanest demo of flavor insensitivity in the whole essay:
-      only the red curves move. Worth one sentence pointing the reader at it.
-    - CEvNS on a 747 still sits below the floor everywhere, so the plane platform is dead
-      for both proven channels, not just IBD
-    - the tanker crosses 1/hr at ~35 km, vs ~9 km for IBD: one technology change buys ~4x range,
-      which is the concrete version of "starts to become a practical supplement to magnetometers"
-    - both CEvNS curves are parallel to each other and to the IBD curves once oscillation is off;
-      everything on this plot is the same 1/d^2, only shifted. That sets up why the next section
-      has to change the cross section by orders of magnitude rather than tinkering. */}
-
 ## Coherent Interactions across Atoms
 
 We now move from single-atom interactions to coherent interactions that involve many atoms. CEvNS only makes limited use of coherent enhancement because there is a limit to the number of nucleons in a nucleus before the nucleus becomes radioactive. The goal of these approaches is to enable $N^2$ enhancement across atoms. If done well, a neutrino could coherently interact with thousands to even millions of individual particles. In theory, this could boost detection rates by many orders of magnitude. But there are a few hard problems that all such approaches must overcome:
@@ -253,20 +243,20 @@ We now move from single-atom interactions to coherent interactions that involve 
 
 To date, coherent weak interactions across atoms have never been demonstrated in practice, and the approaches we'll discuss, while not requiring dramatic far-future technology, will require substantial theory and engineering effort to make practical. However, these are also the kinds of bottlenecks for which AI-assisted research and development is highly effective. Previously, developing such a technique would require expertise spread across several specialized fields: condensed matter physics, quantum sensing, cryogenics, and nuclear engineering. This kind of intellectual labor is something AI has a significant comparative advantage in.
 
-We'll discuss two approaches:
+We'll discuss two approaches (see [Appendix J](neutrino_submarines_supplement.html#appendix-j-literature-review-of-speculative-high-sensitivity-techniques) for an overview):
 
 1. Superradiant Spin Transition Detector
 2. Bose-Einstein Condensate Superabsorption
 
 ## Superradiant Spin Transition Detector
 
-Of the two mechanisms we'll discuss, a superradiant spin-transition detector is the more scientifically well-understood and broadly accepted one. There have been several peer-reviewed papers on the topic; see [Appendix J](neutrino_submarines_supplement.html#appendix-j-literature-review-of-speculative-high-sensitivity-techniques) for an overview.
-
-The detector uses two principles: neutrino spin transitions, and a phenomenon called **superradiance**. The first principle is the spin equivalent of CEvNS. Every atom has a spin pointing in some direction, and a neutrino can interact with an atom and flip its spin:
+Of the two mechanisms we'll discuss, a superradiant spin-transition detector is the more scientifically well-understood and broadly accepted one. There have been several peer-reviewed papers on the topic. The design we discuss today was first proposed in [Galanis et al. (2025)](https://arxiv.org/abs/2508.20520). This detector uses two principles: neutrino spin transitions, and a phenomenon called **superradiance**. The first principle is the spin equivalent of CEvNS. Every atom has a spin pointing in some direction, and a neutrino can interact with an atom and flip its spin:
 
 $\nu + A_{\uparrow} \to \nu + A_{\downarrow}$
 
-On its own, this is unhelpful, since it's a relatively rare interaction. This is where the second principle, superradiance, comes in. If we can prepare a set of atoms such that when a neutrino interacts with one of the atoms, we can't tell which atom was flipped even in principle, we can treat the entire set of atoms as a single quantum system (a [Dicke ladder](https://en.wikipedia.org/wiki/Dicke_state) with $N$ levels). The flip isn't located in any particular atom; it is shared by the entire ensemble at once. Because each of the $N$ atoms participates in the event, the interaction is dramatically more likely than it would be for any single atom. When half the atoms are spin up and the other half spin down (halfway up the Dicke ladder), this gives us an $N^2$ enhancement.
+On its own, this is unhelpful, since it's a relatively rare interaction. This is where the second principle, superradiance, comes in. If we can prepare a set of atoms such that when a neutrino interacts with one of the atoms, we can't tell which atom was flipped even in principle, we can treat the entire set of atoms as a single quantum system (a [Dicke ladder](https://en.wikipedia.org/wiki/Dicke_state) with $N$ levels). In these cases, the flip isn't located in any particular atom, but instead is shared by the entire ensemble at once. Superradiance makes this coherent interaction dramatically more likely than you would naively expect. This process works best when half the atoms are spin up and the other half spin down, in which case the enhancement is $N^2$, where $N$ is the number of atoms.
+
+Galanis et al. (2025) propose measuring this effect using a tank of helium gas which is polarized so that the atoms' nuclear spins are half-spin-up and half-spin-down. The technology to do this is well-understood, and in use today for [Nuclear Magnetic Resonance](https://en.wikipedia.org/wiki/Nuclear_magnetic_resonance_spectroscopy) (NMR) spectroscopy.
 
 <Figure
   src={GalanisCoilImg}
@@ -275,27 +265,25 @@ On its own, this is unhelpful, since it's a relatively rare interaction. This is
   caption={<>Abstract illustration of the detector setup in <a href="https://arxiv.org/abs/2508.20520">Galanis et al. (2025)</a>. Helium-3 gas is contained in the blue sphere, which is surrounded by a solenoid. Both the solenoid and the gas sample are embedded in an external magnetic field <Tex math="B_{ext}" />.</>}
 />
 
-The main challenge of the system is measuring the change. Each spin flip changes the state of the ensemble only slightly. One recent paper ([Galanis et al. (2025)](https://arxiv.org/abs/2508.20520)) detects this by measuring how fast the entire ensemble decoheres — that is, how much faster the quantum state decays. The difficulty is in separating this neutrino-induced decoherence from the mundane decoherence caused by known technical limitations. In that paper's design, the actual fiducial volume is a gas of Helium-3 atoms (an atom with favorable spin characteristics), which we spin up into the prepared "start" state using standard nuclear magnetic resonance techniques. The state of the helium is managed by a set of magnets installed around the volume. The limiting factor is not the mass of the fiducial volume (which is low since we're using helium), but the mass of the supporting magnets and other equipment.
+However, not all the atoms in the tank will actually participate. Reactor-energy neutrinos only interact coherently with a narrow cone of atoms. We only get the $N^2$ boost for the atoms in this thin cone. This cone thins further as neutrinos become higher energy, canceling out the fact that higher energy neutrinos are more likely to interact.
 
-One of the major downsides of this system for reactor-energy neutrinos is that there is a limit to how much momentum can be exchanged with an atom during an interaction. This means high-energy neutrinos can't change direction during an interaction, and only interact coherently with a narrow cone of atoms. This cone grows narrower the higher the energy of the neutrino. The sensitivity of our detector scales approximately as $R^4$, where $R$ is the radius of our sphere of gas.
+<CoherenceConeDemo />
 
-We do the calculations in [Appendix L](neutrino_submarines_supplement.html#appendix-l-superradiant-spin-transition-cross-section). It turns out that a VLCC carrying five 20-meter-radius sensing spheres has quite substantial signal:
+We do the calculations in [Appendix L](neutrino_submarines_supplement.html#appendix-l-superradiant-spin-transition-cross-section). It turns out that a VLCC carrying five 20-meter-radius sensing spheres (the largest practical size) has quite substantial signal:
 
 * **VLCC supertanker (5 km):** $\approx$ 1,070 events/hour
 * **VLCC supertanker (50 km):** $\approx$ 10.7 events/hour
 * **VLCC supertanker (100 km):** $\approx$ 2.7 events/hour
 
-Unlike CEvNS, the signal remains usable even at 100 km. This is on par with active sonar, with the further advantage of being totally passive.
+This signal remains usable even at 100 km, and would set a new state of the art. If such a system could be made practical, it would beat active sonar, and would have the further advantage of being totally passive.
 
 ## Bose-Einstein Condensate Superabsorption
 
-This method is more speculative than the previous one. It's based on a paper proposing to build a "neutrino laser" ([Jones & Formaggio (2024)](https://arxiv.org/abs/2412.11765)). They calculate that a Bose-Einstein condensate (BEC) of the radioactive isotope $^{83}\text{Rb}$ could emit neutrinos superradiantly, shortening its effective half-life from 86 days to minutes in a ~$10^6$-atom condensate.
+But, we can do even better than this. The limitation of the cone goes away if we can place all the atoms in the same effective location. This method is based on [Jones & Formaggio (2024)](https://arxiv.org/abs/2412.11765), who discuss how a Bose-Einstein condensate (BEC) might interact coherently with neutrinos. They discuss two notable effects: superradiant neutrino emission, and superradiant neutrino absorption. A BEC is a group of atoms that are cooled enough that they occupy the same quantum state (including their position). Thus, they can naturally act as a single ensemble when it comes to interacting with neutrinos.
 
-The way this works is just like the spin-transition detector described above: since we can't tell which atom decayed, even in theory, we can treat the entire system as one. Here, each step of the Dicke ladder corresponds to whether an atom is still rubidium, or has decayed. As before, the system absorbs at a rate proportional to $N^2$ when we're exactly halfway up the ladder: half of the atoms have decayed, and the other half haven't. However, we get a much smaller boost when we're not near the center of the ladder (few atoms have decayed, or almost all of them have decayed). This means that the process is slow to start, but proceeds rapidly due to self-reinforcement.
+Their main proposal is a "neutrino laser". Their calculations suggest a BEC made up of the radioactive isotope rubidium-83 could emit neutrinos superradiantly. All the atoms in the BEC could be induced to decay at almost the same time. While rubidium-83 normally has an effective half-life of 86 days, under their setup, all atoms could be induced to decay in the span of minutes. The way this works is just like the spin-transition detector described above: since we can't tell which atom decayed, even in theory, we can treat the entire system as one. Here, each step of the Dicke ladder corresponds to whether an atom is still rubidium, or has decayed. As before, the system absorbs at a rate proportional to $N^2$ when we're exactly halfway up the ladder: half of the atoms have decayed, and the other half haven't. However, we get a much smaller boost when we're not near the center of the ladder (few atoms have decayed, or almost all of them have decayed). This means that the process is slow to start, but proceeds rapidly due to self-reinforcement.
 
-The paper discusses the prospect of running the process in reverse to create a "superabsorber", which they suggest could be used to detect the cosmic neutrino background. They note the idea faces difficulties because the first few neutrino captures are not boosted superradiantly.
-
-However, because we're interested in higher-energy neutrinos, we are freed from many of their constraints. Notably, we can just use hydrogen and rely on inverse beta decay instead of exotic isotopes. We can work around the difficulty of starting the process by using a larger BEC (which has a higher neutrino cross section at the start) and "pre-loading" the process by exposing the condensate to a neutrino source.
+However, what is more interesting for our purposes is the prospect of running the process in reverse: superradiant neutrino absorption. In the paper, they suggest this process could be used to detect the cosmic neutrino background, but note the idea faces difficulties because the first few neutrino captures are not boosted superradiantly. But, because we're interested in higher-energy neutrinos, we are freed from many of their constraints. Notably, we can just use hydrogen and rely on inverse beta decay instead of exotic isotopes. Additionally, we can work around the difficulty of starting the process by using a larger BEC (which has a higher neutrino cross section at the start) and "pre-loading" the process by exposing the condensate to a neutrino source.
 
 This process differs from the spin-transition one in ways both positive and negative for our goals. First, because it emits a neutron and positron, we are immediately able to detect when an event has occurred. Furthermore, a neutrino doesn't have the same coherence requirements it did in the spin-flip case. Even a very high-energy neutrino can interact coherently with the entire condensate (no cone restriction), since the atoms all occupy the same quantum position.
 
@@ -308,22 +296,12 @@ If we do the math, we find that each individual $10^{19}$-atom condensate, held 
 * **$10^{19}$-atom condensate (100 km):** $\approx$ 5.3 events/hour
 * **$10^{19}$-atom condensate (200 km):** $\approx$ 1.5 events/hour
 
-A single trap of microgram-scale hydrogen would outperform every other detector here — but only if the collective enhancement survives theoretical scrutiny. My personal credence in this idea working out is around 40%. See [Appendix M](neutrino_submarines_supplement.html#appendix-m-bose-einstein-condensate-superabsorption-cross-section) for more details.
+A single trap of microgram-scale hydrogen would outperform every other detector here, although the paper was allegedly controversial, according to personal correspondence with grad students involved with the project. My personal credence in this idea working out is around 40%. See [Appendix M](neutrino_submarines_supplement.html#appendix-m-bose-einstein-condensate-superabsorption-cross-section) for more details.
 
 <NeutrinoRangePlot
   detectors={["ibd-vlcc", "cevns-vlcc", "spin-vlcc", "bec"]}
-  caption="All five detector concepts on one axis. Solid lines are ship-mounted, dashed lines airborne; the vertical markers show the ranges of the sensors these would have to compete with."
+  caption="All four detector concepts compared."
 />
-
-{/* TODO: prose for the summary panel. Points the widget makes:
-    - the whole argument in one image: twelve decades separate IBD-on-a-plane from BEC, and the
-      two coherent methods are the only curves still above the floor at the sonar marker
-    - the BEC curve beats an entire instrumented supertanker from 17 micrograms of gas
-    - the spin-transition and BEC curves are NOT parallel past ~30 km, because BEC is charged-current
-      and eats the oscillation dip while the spin flip doesn't -- so the gap between the two
-      narrows exactly in the band that matters militarily. Untoggling oscillation shows this.
-    - honest caveat to state somewhere: none of these curves include backgrounds. Everything here
-      is signal-only, so the 1/hr floor is doing a lot of unexamined work. */}
 
 ## Conclusion
 

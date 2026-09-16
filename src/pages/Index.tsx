@@ -137,7 +137,8 @@ const Home = () =>
       <Section id="about" name="About">
         <h5>Me</h5>
         <p>
-          I'm currently a member of technical staff at <a href="https://hud.ai">hud.ai</a>, building a platform for AI evaluations.
+          I'm currently a research fellow at <a href="https://www.thefai.org/">Foundation for American Innovation</a>, working on AI and national security policy.
+          I was previously a member of technical staff at <a href="https://hud.ai">hud.ai</a>, building a platform for AI evaluations.
           I studied Computer Science and Engineering at UCLA (class of 2025).
           In my free time, I enjoy recreational programming (especially in C).
         </p>
