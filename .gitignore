@@ -25,3 +25,6 @@ yarn-error.log*
 .vite/
 
 references/
+
+# FAI-branded build output
+/dist-fai

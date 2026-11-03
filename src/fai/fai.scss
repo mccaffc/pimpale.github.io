@@ -1,0 +1,208 @@
+@import "./brand/tokens.css";
+@import "./brand/fonts.css";
+
+// Bootstrap mapped to the FAI master palette (light reading surface).
+$cod: #121212;
+$smoke: #F3F3F3;
+$timber: #D9D9D6;
+$orange: #FF4F00;
+
+$white: #FFFFFF;
+$black: $cod;
+$body-bg: $smoke;
+$body-color: $cod;
+$primary: $orange;
+$secondary: #5A5A58;
+$link-color: $cod;
+$link-hover-color: $cod;
+$link-decoration: underline;
+$border-color: $timber;
+$border-radius: 0;
+$border-radius-sm: 0;
+$border-radius-lg: 0;
+$card-bg: $white;
+$card-border-color: $timber;
+$font-family-base: "IBM Plex Serif", Georgia, serif;
+$font-family-monospace: "IBM Plex Mono", ui-monospace, monospace;
+$headings-font-weight: 600;
+$enable-shadows: false;
+$enable-gradients: false;
+$figure-caption-color: #4A4A48;
+$table-border-color: $timber;
+
+@import "bootstrap/scss/bootstrap";
+
+html { font-synthesis: none; }
+body { background: $smoke; }
+
+.fai-page {
+  --measure: 42rem;
+  --wide: 60rem;
+  color: $cod;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+// ---------- top bar ----------
+.fai-topbar {
+  background: $smoke;
+  border-bottom: 1px solid $timber;
+  padding: 24px var(--fai-grid-margin);
+  @media (min-width: 672px) { padding-inline: 32px; }
+}
+.fai-topbar-logo { display: block; width: 168px; height: auto; }
+
+// ---------- hero ----------
+.fai-hero {
+  background: $cod;
+  color: $smoke;
+  border-top: 8px solid $orange;
+}
+.fai-hero-inner {
+  max-width: 1312px;
+  margin: 0 auto;
+  padding: 48px var(--fai-grid-margin) 16px;
+  @media (min-width: 672px) { padding: 80px 32px 24px; }
+}
+.fai-hero-text { max-width: 60rem; }
+.fai-hero-label {
+  font-family: var(--fai-font-utility), sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $orange;
+  margin: 0 0 16px;
+}
+// Schmalfette Grotesk is FAI-licensed and not in this public repo, so the
+// title is set in IBM Plex Sans Condensed Bold here.
+.fai-display {
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  font-size: clamp(2rem, 5vw, 4.25rem);
+  line-height: 1.02;
+  margin: 0 0 32px;
+  color: $smoke;
+  text-wrap: balance;
+}
+.fai-hero-byline {
+  font-family: var(--fai-font-utility), sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #BDBDB9;
+  margin: 0;
+  strong { color: $smoke; font-weight: 600; }
+}
+.sep { padding: 0 0.5em; color: $orange; }
+.fai-hero-art {
+  margin-top: 16px;
+  figure { margin: 0 !important; }
+  .figure-caption {
+    font-family: var(--fai-font-utility), sans-serif;
+    font-size: 0.8125rem;
+    color: #9A9A96;
+  }
+}
+
+// ---------- article ----------
+.fai-article {
+  --pad: var(--fai-grid-margin);
+  padding: 48px var(--pad) 96px;
+  @media (min-width: 672px) { --pad: 32px; }
+  > .fai-hero { margin: -48px calc(-1 * var(--pad)) 64px; }
+  > section, > p, > figure, > div { max-width: var(--wide); margin-left: auto; margin-right: auto; }
+}
+.fai-article section {
+  overflow: visible !important;
+  margin-top: 64px !important;
+  > p, > ul, > ol, > blockquote, > h3, > h4, > .katex-display, > div > h2 {
+    max-width: var(--measure);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  > div:first-of-type {
+    max-width: var(--measure);
+    margin: 0 auto 24px;
+    border-top: 2px solid $cod;
+    padding-top: 16px;
+    > a.float-end {
+      text-decoration: none;
+      color: #9A9A96 !important;
+      h3 { font-family: var(--fai-font-mono), monospace; font-size: 1rem; font-weight: 400; margin: 0; line-height: 2.25rem; }
+      &:hover { color: $orange !important; }
+    }
+    h2 { font-size: 1.75rem; line-height: 2.25rem; margin: 0; padding-right: 2rem; }
+  }
+  h3 { font-size: 1.3125rem; line-height: 2rem; margin-top: 40px; margin-bottom: 12px; }
+  h4 { font-size: 1.125rem; line-height: 1.75rem; margin-top: 32px; }
+  p { margin-bottom: 1.25rem; }
+  li { margin-bottom: 0.375rem; }
+  .table-responsive, .card, .katex-display { max-width: var(--wide); margin-left: auto; margin-right: auto; }
+}
+// the hero carries the article title, so drop the repeated first heading
+.fai-main .fai-article > section:first-of-type > div:first-of-type { display: none; }
+.fai-main .fai-article > section:first-of-type { margin-top: 0 !important; }
+.fai-main .fai-article > section:first-of-type > p:first-of-type {
+  font-size: 1.3125rem; line-height: 2rem;
+}
+.fai-supplement .fai-article > section:first-of-type > div:first-of-type {
+  border-top: 8px solid $orange; padding-top: 24px;
+  h2 { font-size: 2.25rem; line-height: 2.75rem; }
+}
+
+.fai-article a { text-decoration-color: $orange; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.fai-article a:hover { text-decoration-thickness: 3px; }
+.fai-article a:focus-visible, .fai-page button:focus-visible, .fai-page input:focus-visible {
+  outline: 2px solid $cod; outline-offset: 2px; box-shadow: 0 0 0 4px $smoke;
+}
+
+.figure-caption {
+  font-family: var(--fai-font-utility), sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+.fai-article figure img { background: $white; }
+.table { font-family: var(--fai-font-utility), sans-serif; font-size: 0.9375rem; --bs-table-bg: transparent; }
+.table th { font-weight: 600; border-bottom: 2px solid $cod; }
+.card { border-radius: 0; }
+.card-title { font-family: var(--fai-font-utility), sans-serif; font-weight: 600; text-decoration: none !important; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.875rem; }
+code { color: $cod; background: #E6E6E3; padding: 0 4px; }
+blockquote { border-left: 4px solid $orange; padding-left: 16px; }
+
+// ---------- chart panels (FAI screen-chart dark treatment) ----------
+.fai-chart-panel {
+  background: $cod;
+  color: $smoke;
+  padding: 24px 16px 16px;
+  margin: 40px auto !important;
+  max-width: var(--wide);
+  font-family: var(--fai-font-utility), sans-serif;
+  @media (min-width: 672px) { padding: 32px 32px 24px; }
+  figure { margin: 0 auto !important; }
+  svg text { font-family: var(--fai-font-utility), sans-serif; }
+  .figure-caption { color: #BDBDB9; margin-top: 16px !important; }
+  button { color: inherit; }
+  .form-range::-webkit-slider-runnable-track { background: #3A3A3A; }
+  .form-range::-moz-range-track { background: #3A3A3A; }
+  .form-range::-webkit-slider-thumb { background: $orange; }
+  .form-range::-moz-range-thumb { background: $orange; }
+  .form-check-input { background-color: #2C2C2C; border-color: #9A9A96; }
+  .form-check-input:checked { background-color: $orange; border-color: $orange; }
+}
+
+// ---------- footer ----------
+.fai-footer { background: $cod; color: $smoke; border-top: 8px solid $orange; }
+.fai-footer-inner {
+  max-width: 1312px; margin: 0 auto; padding: 48px var(--fai-grid-margin);
+  font-family: var(--fai-font-utility), sans-serif; font-size: 0.875rem; line-height: 1.5rem;
+  @media (min-width: 672px) { padding-inline: 32px; }
+  a { color: $smoke; text-decoration-color: $orange; }
+  p { margin: 0 0 8px; }
+}
+.fai-footer-logo { display: block; width: 192px; height: auto; margin-bottom: 32px; }
+.fai-footer-fine { color: #9A9A96; }
+
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }

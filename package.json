@@ -43,6 +43,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:fai": "vite build -c vite.fai.config.mts",
     "preview": "vite preview"
   },
   "eslintConfig": {
