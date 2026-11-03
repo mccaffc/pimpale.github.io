@@ -28,6 +28,12 @@ export default defineConfig({
         {
           src: '../node_modules/onnxruntime-web/dist/*.wasm',
           dest: '.'
+        },
+        // standalone jupyter exports: copied as-is rather than built, since
+        // their inline css doesn't survive minification
+        {
+          src: 'assets/**/*.html',
+          dest: '.'
         }
       ]
     }),
@@ -39,7 +45,9 @@ export default defineConfig({
     rollupOptions: {
       // absolute paths: these are resolved against `root` (which is already
       // src/), so cwd-relative ones would look for src/src/*.html
-      input: globSync(path.resolve(import.meta.dirname, "src/**/*.html"))
+      input: globSync(path.resolve(import.meta.dirname, "src/**/*.html"), {
+        ignore: path.resolve(import.meta.dirname, "src/assets/**")
+      })
     }
   }
 })

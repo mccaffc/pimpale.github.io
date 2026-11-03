@@ -1,1 +1,0 @@
-import{n as e}from"./vec2-Cg_6kx6x.js";function t(e,t){if(!e)throw Error(t)}function n(n,r){t(n>0),t(r>0);let i=[];for(let t=0;t<n;t++){let a=t/n,o=(t+1)/n;for(let t=0;t<r;t++){let n=t/r,s=(t+1)/r;i.push(e(a,n)),i.push(e(o,n)),i.push(e(a,s)),i.push(e(o,n)),i.push(e(o,s)),i.push(e(a,s))}}return i}export{t as n,n as t};
