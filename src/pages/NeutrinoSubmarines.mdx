@@ -277,9 +277,9 @@ We do the calculations in [Appendix L](neutrino_submarines_supplement.html#appen
 
 This signal remains usable even at 100 km, and would set a new state of the art. If such a system could be made practical, it would beat active sonar, and would have the further advantage of being totally passive.
 
-## Bose-Einstein Condensate Superabsorption
+## Bose-Einstein Condensate Superabsorption (low-probability)
 
-But, we can do even better than this. The limitation of the cone goes away if we can place all the atoms in the same effective location. This method is based on [Jones & Formaggio (2024)](https://arxiv.org/abs/2412.11765), who discuss how a Bose-Einstein condensate (BEC) might interact coherently with neutrinos. They discuss two notable effects: superradiant neutrino emission, and superradiant neutrino absorption. A BEC is a group of atoms that are cooled enough that they occupy the same quantum state (including their position). Thus, they can naturally act as a single ensemble when it comes to interacting with neutrinos.
+But, we might be able to do even better than this. The limitation of the cone goes away if we can place all the atoms in the same effective location. This method is based on [Jones & Formaggio (2024)](https://arxiv.org/abs/2412.11765), who discuss how a Bose-Einstein condensate (BEC) might interact coherently with neutrinos. They discuss two notable effects: superradiant neutrino emission, and superradiant neutrino absorption. A BEC is a group of atoms that are cooled enough that they occupy the same quantum state (including their position). Thus, they can naturally act as a single ensemble when it comes to interacting with neutrinos.
 
 Their main proposal is a "neutrino laser". Their calculations suggest a BEC made up of the radioactive isotope rubidium-83 could emit neutrinos superradiantly. All the atoms in the BEC could be induced to decay at almost the same time. While rubidium-83 normally has an effective half-life of 86 days, under their setup, all atoms could be induced to decay in the span of minutes. The way this works is just like the spin-transition detector described above: since we can't tell which atom decayed, even in theory, we can treat the entire system as one. Here, each step of the Dicke ladder corresponds to whether an atom is still rubidium, or has decayed. As before, the system absorbs at a rate proportional to $N^2$ when we're exactly halfway up the ladder: half of the atoms have decayed, and the other half haven't. However, we get a much smaller boost when we're not near the center of the ladder (few atoms have decayed, or almost all of them have decayed). This means that the process is slow to start, but proceeds rapidly due to self-reinforcement.
 
@@ -296,7 +296,7 @@ If we do the math, we find that each individual $10^{19}$-atom condensate, held 
 * **$10^{19}$-atom condensate (100 km):** $\approx$ 5.3 events/hour
 * **$10^{19}$-atom condensate (200 km):** $\approx$ 1.5 events/hour
 
-A single trap of microgram-scale hydrogen would outperform every other detector here, although the paper was allegedly controversial, according to personal correspondence with grad students involved with the project. My personal credence in this idea working out is around 40%. See [Appendix M](neutrino_submarines_supplement.html#appendix-m-bose-einstein-condensate-superabsorption-cross-section) for more details.
+A single trap of microgram-scale hydrogen would outperform every other detector here. However, several strong arguments against the prospect of a neutrino laser were noted by [Lin et al (2025)](https://arxiv.org/abs/2510.21692), and thus my personal credence in this idea working out has fallen to less than 5%. See [Appendix M](neutrino_submarines_supplement.html#appendix-m-bose-einstein-condensate-superabsorption-cross-section) for more details.
 
 <NeutrinoRangePlot
   detectors={["ibd-vlcc", "cevns-vlcc", "spin-vlcc", "bec"]}
