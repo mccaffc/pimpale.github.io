@@ -11,7 +11,7 @@ export const palette: Readonly<Record<PaletteKey, string>> = {
   bg3: '#3A3A3A',
   bg4: '#5A5A58',
   gray: '#6E6E6B',
-  fg4: '#FF4F00',   // hero bubble-chamber tracks: International Orange
+  fg4: '#9A9A96',   // hero bubble-chamber tracks
   fg3: '#9A9A96',
   fg2: '#BDBDB9',
   fg1: '#F3F3F3',   // Smoke White
